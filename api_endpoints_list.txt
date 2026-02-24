@@ -1,0 +1,117 @@
+
+ONLINE EVENT TICKET BOOKING PLATFORM
+COMPLETE REST API STRUCTURE
+
+
+
+1. AUTH APIs
+POST   /auth/signup
+POST   /auth/login
+GET    /auth/me
+
+
+2. PLATFORM ADMIN APIs
+
+# Venue Management
+POST   /admin/venues
+GET    /admin/venues
+GET    /admin/venues/{id}
+PUT    /admin/venues/{id}
+DELETE /admin/venues/{id}
+
+OFFERS – ADMIN APIs
+POST   /admin/offers
+GET    /admin/offers
+PUT    /admin/offers/{id}
+DELETE /admin/offers/{id}
+
+# Event Management
+POST   /admin/events
+GET    /admin/events
+GET    /admin/events/{id}
+PUT    /admin/events/{id}
+PUT    /admin/events/{id}/status      (upcoming / closed / cancelled)
+DELETE /admin/events/{id}
+
+
+3. EVENT ORGANIZER APIs
+
+# Seat Management
+POST   /organizer/events/{event_id}/seats      (bulk create seats)
+GET    /organizer/events/{event_id}/seats
+PUT    /organizer/seats/{seat_id}
+
+# Booking Summary & Controls
+GET    /organizer/events/{event_id}/booking-summary
+GET    /organizer/events/{event_id}/orders
+PUT    /organizer/events/{event_id}/close
+
+
+4. CUSTOMER APIs
+
+# Event Browsing
+GET    /events/upcoming
+GET    /events/{event_id}
+GET    /events/{event_id}/seats
+
+# Order & Booking
+POST   /customer/orders                      (create order, status = pending)
+GET    /customer/orders
+GET    /customer/orders/{order_id}
+
+# Payment Simulation
+POST   /customer/orders/{order_id}/pay       (confirm payment)
+
+# Ticket Handling
+GET    /customer/tickets
+GET    /customer/tickets/{order_id}
+GET    /tickets/{ticket_code}
+
+# Refund Requests
+POST   /customer/refund-requests
+GET    /customer/refund-requests
+
+# Support Cases
+POST   /customer/support-cases
+GET    /customer/support-cases
+
+
+5. ENTRY MANAGER APIs
+
+# Ticket Validation
+POST   /entry/validate-ticket
+
+# Entry Logs (Optional but Professional)
+GET    /entry/logs
+GET    /entry/logs/{event_id}
+
+
+6. SUPPORT EXECUTIVE APIs
+
+# Refund Handling
+GET    /support/refund-requests
+PUT    /support/refund-requests/{id}/approve
+PUT    /support/refund-requests/{id}/reject
+
+# Support Case Management
+GET    /support/support-cases
+PUT    /support/support-cases/{id}
+PUT    /support/support-cases/{id}/close
+
+
+BUSINESS RULE ENFORCEMENT
+
+1. Booking allowed only if event_status = upcoming
+2. Ticket becomes invalid after event_date
+3. Refund allowed only before event_date
+4. If refund approved:
+   - order_status = refunded
+   - seat_status = available
+   - ticket_status = cancelled
+5. Ticket becomes invalid once marked as used
+6. Users cannot exceed max_tickets_per_user
+7. Payment required before ticket generation
+8. Seat cannot be double-booked
+
+
+END OF API STRUCTURE

@@ -1,0 +1,241 @@
+
+ONLINE EVENT TICKET BOOKING PLATFORM
+STREAMLIT UI SCREENS STRUCTURE
+
+UI APPROACH:
+Single Streamlit app with sidebar-based navigation.
+Screens rendered conditionally based on logged-in role.
+State managed using st.session_state.
+
+
+1. AUTHENTICATION SCREENS
+
+1) LOGIN SCREEN
+--------------------------------
+Components:
+- Email input
+- Password input
+- Login button
+- Link to Signup
+
+After successful login:
+- Store user_id in session
+- Store role in session
+- Redirect to role dashboard
+
+
+2) SIGNUP SCREEN
+--------------------------------
+Components:
+- Name input
+- Email input
+- Password input
+- Role selection (customer only for public signup)
+- Register button
+
+
+2. CUSTOMER SCREENS
+
+3) BROWSE EVENTS SCREEN
+--------------------------------
+Display:
+- List of upcoming events
+- Event name
+- Category
+- Date
+- Venue
+- Ticket price
+- "View Details" button
+
+
+4) EVENT DETAIL & SEAT SELECTION SCREEN
+--------------------------------
+Display:
+- Event information
+- Seat grid/list:
+    Available seats → selectable
+    Booked seats → disabled
+- Selected seats display
+- Total price calculation
+- "Proceed to Checkout" button
+
+Validation:
+- Cannot exceed max_tickets_per_user
+
+
+5) CHECKOUT SCREEN
+--------------------------------
+Display:
+- Selected seats
+- Enter Offer Code input field
+- "Apply Offer" button
+- Show:
+    - Discount amount
+    - Updated total
+- Total amount
+- Payment mode dropdown (UPI/Card/Netbanking)
+- "Pay Now" button
+
+On successful payment:
+- Show success message
+- Redirect to Ticket Confirmation
+
+
+6) TICKET CONFIRMATION SCREEN
+--------------------------------
+Display:
+- Order ID
+- Event name
+- Seat numbers
+- Unique ticket codes
+- Ticket status (Active)
+- Order status (Confirmed)
+
+
+7) MY ORDERS SCREEN
+--------------------------------
+Display:
+- List of all orders
+- Order ID
+- Event name
+- Order status
+- Payment status
+- Refund button (if eligible)
+
+
+8) REFUND REQUEST SCREEN
+--------------------------------
+Components:
+- Select eligible Order ID
+- Reason text area
+- Submit button
+
+Validation:
+- Refund allowed only before event_date
+
+
+9) SUPPORT SCREEN
+--------------------------------
+Components:
+- Issue description text area
+- Related Order ID (optional)
+- Submit button
+
+Display:
+- List of previous support cases
+- Case status (Open / Closed)
+
+
+3. PLATFORM ADMIN SCREENS
+
+10) MANAGE VENUES SCREEN
+--------------------------------
+Components:
+- Add Venue form:
+    - Name
+    - City
+    - Capacity
+    - Address
+- Submit button
+
+Display:
+- Table of venues
+- Edit/Delete options
+
+
+11) MANAGE EVENTS SCREEN
+--------------------------------
+Components:
+- Add Event form:
+    - Name
+    - Category
+    - Event date
+    - Ticket price
+    - Max tickets per user
+    - Venue selection
+- Submit button
+
+Display:
+- Event list
+- Status dropdown (Upcoming / Closed / Cancelled)
+- Update button
+
+
+4. EVENT ORGANIZER SCREENS
+
+12) GENERATE SEATS SCREEN
+--------------------------------
+Components:
+- Select Event
+- Enter number of seats
+- Generate button
+
+Display:
+- Seat list with status
+
+
+13) BOOKING SUMMARY SCREEN
+--------------------------------
+Display:
+- Total seats
+- Seats booked
+- Seats available
+- Total revenue
+- Event status
+
+
+5. ENTRY MANAGER SCREEN
+
+14) TICKET VALIDATION SCREEN
+--------------------------------
+Components:
+- Ticket code input field
+- Validate button
+
+If valid:
+- Show Event name
+- Seat number
+- Entry timestamp
+- Mark ticket as used
+
+If invalid/used/expired:
+- Show error message
+
+
+6. SUPPORT EXECUTIVE SCREENS
+
+15) REFUND DASHBOARD SCREEN
+--------------------------------
+Display:
+- List of refund requests
+- Refund ID
+- Order ID
+- User
+- Reason
+- Approve button
+- Reject button
+
+
+16) SUPPORT CASE DASHBOARD SCREEN
+--------------------------------
+Display:
+- List of support cases
+- Case ID
+- User
+- Message
+- Status
+- Update status option
+- Close case button
+
+
+MINIMUM REQUIRED SCREENS FOR DEMO
+
+1) Login
+2) Browse Events
+3) Seat Selection
+4) Checkout
+5) Ticket Confirmation
+6) Ticket Validation
+
+
+END OF STREAMLIT UI SCREENS STRUCTURE
